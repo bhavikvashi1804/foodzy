@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import './screen/categories.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Foodzy',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -28,9 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Foodzy'),
       ),
-      body: Center(
-        child: Text('This is a Home Page'),
-      ),
+      body: CategoriesPage(),
     );
   }
 }
