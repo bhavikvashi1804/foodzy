@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 
 import '../models/dummy_categories.dart';
+import '../widget/meal_item.dart';
+
 
 class CategoryMealsPage extends StatelessWidget {
 
@@ -23,6 +25,8 @@ class CategoryMealsPage extends StatelessWidget {
 
     final categoryTitle=routeArgs['title'];
     final categoryID=routeArgs['id'];
+    
+
     final categoryMeals=DUMMY_MEALS.where((element) {
       return element.categories.contains(categoryID);
     }).toList();
@@ -33,7 +37,7 @@ class CategoryMealsPage extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (ctx,index){
-          return Text(categoryMeals[index].title);
+          return MealItem(title: categoryMeals[index].title, imageUrl: categoryMeals[index].imageUrl, duration: categoryMeals[index].duration, complexity: categoryMeals[index].complexity, afordability: categoryMeals[index].affordability);
         },
         itemCount: categoryMeals.length,
       ),
