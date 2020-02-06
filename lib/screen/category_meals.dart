@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class CategoryMealsPage extends StatelessWidget {
 
+
+  static const String routeName='/category-meals';
+
   /*
   final String categoryID,categoryTitle;
   final Color color;
@@ -17,7 +20,7 @@ class CategoryMealsPage extends StatelessWidget {
 
     final categoryTitle=routeArgs['title'];
     final categoryID=routeArgs['id'];
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle),
