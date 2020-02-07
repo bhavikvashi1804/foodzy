@@ -11,6 +11,10 @@ class CategoryMealsPage extends StatefulWidget {
 
   static const String routeName='/category-meals';
 
+  List<Meal> availableMeals;
+
+  CategoryMealsPage(this.availableMeals);
+
   @override
   _CategoryMealsPageState createState() => _CategoryMealsPageState();
 }
@@ -43,7 +47,7 @@ class _CategoryMealsPageState extends State<CategoryMealsPage> {
       categoryID=routeArgs['id'];
       
 
-      displayMeals=DUMMY_MEALS.where((element) {
+      displayMeals=widget.availableMeals.where((element) {
         return element.categories.contains(categoryID);
       }).toList();
 
