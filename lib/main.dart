@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './screen/filters_screen.dart';
 import './screen/tabs_screen.dart';
 import './screen/category_meals.dart';
 import './screen/meal_detail.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/':(ctx)=>TabsScreen(),
         CategoryMealsPage.routeName:(ctx)=>CategoryMealsPage(),
         MealDetailPage.routeName:(ctx)=>MealDetailPage(),
+        FilterScreen.routeName:(ctx)=>FilterScreen(),
       },
       //onGenerateRoute called when you have not registered your route in your routes 
       //it is used when we use dynamic routes 
