@@ -1,35 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:foodzy/models/meal.dart';
 
 
 import '../models/dummy_categories.dart';
 import '../widget/meal_item.dart';
 
 
-class CategoryMealsPage extends StatelessWidget {
+class CategoryMealsPage extends StatefulWidget {
 
 
   static const String routeName='/category-meals';
 
-  /*
-  final String categoryID,categoryTitle;
-  final Color color;
+  @override
+  _CategoryMealsPageState createState() => _CategoryMealsPageState();
+}
 
-  CategoryMealsPage(this.categoryID,this.categoryTitle,this.color);
-  */
+class _CategoryMealsPageState extends State<CategoryMealsPage> {
 
+
+  String categoryTitle,categoryID;
+  List<Meal> displayMeals;
+  var _loadData=false;
+
+  @override
+  void initState() {
+
+
+    super.initState();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+    //initState works but problem is with ModalRoute context
+    //to use context we have to use didChnageDependencies
+
+
+    if(!_loadData){
+      final routeArgs=ModalRoute.of(context).settings.arguments as Map<String,String>;
+
+      categoryTitle=routeArgs['title'];
+      categoryID=routeArgs['id'];
+      
+
+      displayMeals=DUMMY_MEALS.where((element) {
+        return element.categories.contains(categoryID);
+      }).toList();
+
+      _loadData=true;
+      //to load data only for first time
+    }  
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     
-    final routeArgs=ModalRoute.of(context).settings.arguments as Map<String,String>;
-
-    final categoryTitle=routeArgs['title'];
-    final categoryID=routeArgs['id'];
     
-
-    final categoryMeals=DUMMY_MEALS.where((element) {
-      return element.categories.contains(categoryID);
-    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -37,10 +64,28 @@ class CategoryMealsPage extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (ctx,index){
-          return MealItem(id:categoryMeals[index].id,title: categoryMeals[index].title, imageUrl: categoryMeals[index].imageUrl, duration: categoryMeals[index].duration, complexity: categoryMeals[index].complexity, afordability: categoryMeals[index].affordability);
+          return MealItem(
+            id:displayMeals[index].id,
+            title: displayMeals[index].title,
+            imageUrl: displayMeals[index].imageUrl, 
+            duration: displayMeals[index].duration, 
+            complexity: displayMeals[index].complexity, 
+            afordability: displayMeals[index].affordability,
+            removeItem: _removeMeal,
+          );
         },
-        itemCount: categoryMeals.length,
+        itemCount: displayMeals.length,
       ),
     );
+  }
+
+
+
+  void _removeMeal(String mealID){
+
+    setState(() {
+      displayMeals.removeWhere((element) => element.id==mealID);
+    });
+
   }
 }
