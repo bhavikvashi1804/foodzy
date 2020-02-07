@@ -5,27 +5,45 @@ import 'package:flutter/material.dart';
 import '../screen/categories.dart';
 import '../screen/fav_screen.dart';
 import '../widget/main_drawer.dart';
+import '../models/meal.dart';
 
 
 class TabsScreen extends StatefulWidget {
+  
+  final List<Meal> favMeals;
+
+  TabsScreen(this.favMeals);
+  
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
 
+  List<Meal> fMeals;
+  List<Map<String,Object>> _pages;
 
-  final List<Map<String,Object>> _pages=[
-    {
-      'page':CategoriesPage(),
-      'title':'Categories',
-    },
-    {
-      'page':FavPage(),
-      'title':'Favorites',
-    }
+
+  //widget is not available to use in _pages
+  @override
+  void initState() { 
+
+
+    _pages=[
+      {
+        'page':CategoriesPage(),
+        'title':'Categories',
+      },
+      {
+        'page':FavPage(widget.favMeals),
+        //here in init state widget.favMeals is allowed 
+        'title':'Favorites',
+      }
+      
+    ];
     
-  ];
+    super.initState();
+  }
 
 
   int _selectedPageIndex=0;

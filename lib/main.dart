@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> availableMeals=DUMMY_MEALS;
+  List<Meal> favMeals=[];
 
 
   void _setFilters(Map<String, bool> filterData) {
@@ -50,6 +51,36 @@ class _MyAppState extends State<MyApp> {
 
     print('after  ${availableMeals.length}');
   }
+
+
+
+ 
+
+  void _toggleFavorite(String mealId) {
+    
+    final existingIndex =favMeals.indexWhere((meal) => meal.id == mealId);
+    // returns -1 if not found
+
+    
+    if (existingIndex >= 0) {
+      setState(() {
+        favMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        favMeals.add(
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
+        );
+      });
+    }
+  }
+
+  bool _isMealFav(String id){
+    return favMeals.any(
+      (meal)=>meal.id==id
+    );
+  }
+
 
 
   @override
@@ -82,9 +113,9 @@ class _MyAppState extends State<MyApp> {
 
       initialRoute: '/',
       routes: {
-        '/':(ctx)=>TabsScreen(),
+        '/':(ctx)=>TabsScreen(favMeals),
         CategoryMealsPage.routeName:(ctx)=>CategoryMealsPage(availableMeals),
-        MealDetailPage.routeName:(ctx)=>MealDetailPage(),
+        MealDetailPage.routeName:(ctx)=>MealDetailPage(_toggleFavorite,_isMealFav),
         FilterScreen.routeName:(ctx)=>FilterScreen(_filters,_setFilters),
       },
       //onGenerateRoute called when you have not registered your route in your routes 

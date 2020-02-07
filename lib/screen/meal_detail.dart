@@ -5,6 +5,10 @@ import '../models/dummy_categories.dart';
 class MealDetailPage extends StatelessWidget {
 
   static const String routeName='/meal-detail';
+  Function tFav,isFav;
+
+  MealDetailPage(this.tFav,this.isFav);
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +72,8 @@ class MealDetailPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: (){
-          Navigator.of(context).pop(mealID);
-        },  
+        child: Icon(isFav(mealID)?Icons.star:Icons.star_border),
+        onPressed:()=> tFav(mealID),
       ),
       
       
