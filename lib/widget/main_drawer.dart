@@ -27,8 +27,12 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
          
-          buildListTile('Meals', Icons.restaurant,(){ Navigator.of(context).pushNamed('/');}),
-          buildListTile('Filter',Icons.settings,(){ Navigator.of(context).pushNamed(FilterScreen.routeName);}),
+          buildListTile('Meals', Icons.restaurant,(){ Navigator.of(context).pushReplacementNamed('/');}),
+          buildListTile('Filter',Icons.settings,(){ Navigator.of(context).pushReplacementNamed(FilterScreen.routeName);}),
+          //pushReplacementNamed route does not amke load on Stack
+          //replace current page with new page
+          //donot generate stack of pages
+          //for login this is also used 
           
         ],
       ),
