@@ -37,7 +37,7 @@ class CategoryMealsPage extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (ctx,index){
-          return MealItem(title: categoryMeals[index].title, imageUrl: categoryMeals[index].imageUrl, duration: categoryMeals[index].duration, complexity: categoryMeals[index].complexity, afordability: categoryMeals[index].affordability);
+          return MealItem(id:categoryMeals[index].id,title: categoryMeals[index].title, imageUrl: categoryMeals[index].imageUrl, duration: categoryMeals[index].duration, complexity: categoryMeals[index].complexity, afordability: categoryMeals[index].affordability);
         },
         itemCount: categoryMeals.length,
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './screen/categories.dart';
 import './screen/category_meals.dart';
+import './screen/meal_detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,6 +39,20 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(ctx)=>CategoriesPage(),
         CategoryMealsPage.routeName:(ctx)=>CategoryMealsPage(),
+        MealDetailPage.routeName:(ctx)=>MealDetailPage(),
+      },
+      //onGenerateRoute called when you have not registered your route in your routes 
+      //it is used when we use dynamic routes 
+      //we donot requires it here
+      onGenerateRoute: (settings){
+        print(settings.arguments);
+        //settings object is used to get arguments, name
+        return MaterialPageRoute(builder: (ctx)=>CategoryMealsPage());
+      },
+      //onUnknownRoute called when Flutter fails to build page on our measures 
+      onUnknownRoute: (settings){
+        //this is used as when you enter url which is not exist then it display page as opps this page is not exist 
+        return MaterialPageRoute(builder: (ctx)=>CategoryMealsPage());
       },
     );
   }

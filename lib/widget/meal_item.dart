@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodzy/models/meal.dart';
+import 'package:foodzy/screen/meal_detail.dart';
 
 
 class MealItem extends StatelessWidget {
 
 
-  final String title,imageUrl;
+  final String id,title,imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability afordability;
@@ -52,6 +53,7 @@ class MealItem extends StatelessWidget {
 
 
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -59,14 +61,15 @@ class MealItem extends StatelessWidget {
     @required this.afordability
   });
 
-  void selectMeal(){
+  void selectMeal(BuildContext context){
+    Navigator.pushNamed(context, MealDetailPage.routeName,arguments: id);
 
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap:()=> selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         elevation: 4.0,
@@ -78,7 +81,9 @@ class MealItem extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight: Radius.circular(15)),
-                  child: Image.network(imageUrl,height : 250,width: double.infinity,fit:BoxFit.cover ,),
+                  child: Hero(
+                    tag:'image',
+                    child: Image.network(imageUrl,height : 250,width: double.infinity,fit:BoxFit.cover ,)),
                 ),
                 Positioned(
                   //positioned is used to provide position
