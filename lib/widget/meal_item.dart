@@ -81,9 +81,7 @@ class MealItem extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.only(topLeft:Radius.circular(15),topRight: Radius.circular(15)),
-                  child: Hero(
-                    tag:'image',
-                    child: Image.network(imageUrl,height : 250,width: double.infinity,fit:BoxFit.cover ,)),
+                  child: Image.network(imageUrl,height : 250,width: double.infinity,fit:BoxFit.cover ,),
                 ),
                 Positioned(
                   //positioned is used to provide position

@@ -24,9 +24,7 @@ class MealDetailPage extends StatelessWidget {
             Container(
               height:300,
               width:double.infinity,
-              child:Hero(
-                tag:'image',
-                child: Image.network(selectedMeal.imageUrl, fit:BoxFit.cover,)),
+              child:Image.network(selectedMeal.imageUrl, fit:BoxFit.cover,),
             ),
 
             buildSectiionTitle(context,'Ingredients'),
